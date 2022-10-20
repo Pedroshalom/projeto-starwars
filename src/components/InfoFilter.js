@@ -12,6 +12,7 @@ function InfoFilter() {
         type="text"
         value={ nameFilter }
         onChange={ name }
+        placeholder="addPlanet"
       />
       <select
         data-testid="column-filter"

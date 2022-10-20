@@ -27,7 +27,7 @@ function Table() {
           planets.filter((planet) => planet.name.toUpperCase()
             .includes(nameFilter.toUpperCase()))
             .map((planet) => (
-              <tr key={ planet.name }>
+              <tr data-testid="planetas" key={ planet.name }>
                 <td>{ planet.name }</td>
                 <td>{ planet.rotation_period }</td>
                 <td>{ planet.orbital_period }</td>
