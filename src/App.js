@@ -7,9 +7,7 @@ import InfoFilter from './components/InfoFilter';
 function App() {
   return (
     <PlanetsProvider>
-      <div className="title">
-        <h1>Star Wars</h1>
-      </div>
+      <h1>Star Wars</h1>
       <InfoFilter />
       <Table />
     </PlanetsProvider>
