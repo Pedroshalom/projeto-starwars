@@ -4,6 +4,11 @@ import PlanetsContext from './PlanetsContext';
 
 function PlanetsProvider({ children }) {
   const [planets, setPlanets] = useState([]);
+  const [nameFilter, setFilterName] = useState('');
+
+  const name = ({ target }) => {
+    setFilterName(target.value);
+  };
 
   useEffect(() => {
     const URL = 'https://swapi.dev/api/planets';
@@ -24,7 +29,9 @@ function PlanetsProvider({ children }) {
 
   const context = React.useMemo(() => ({
     planets,
-  }), [planets]);
+    nameFilter,
+    name,
+  }), [planets, nameFilter]);
 
   return (
     <PlanetsContext.Provider value={ context }>
