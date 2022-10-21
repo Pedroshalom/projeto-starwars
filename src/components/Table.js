@@ -4,7 +4,7 @@ import PlanetsContext from '../context/PlanetsContext';
 function Table() {
   const { planets, nameFilter } = useContext(PlanetsContext);
   return (
-    <table clasName="lista">
+    <table>
       <thead>
         <tr>
           <th>Name</th>
@@ -27,7 +27,7 @@ function Table() {
           planets.filter((planet) => planet.name.toUpperCase()
             .includes(nameFilter.toUpperCase()))
             .map((planet) => (
-              <tr data-testid="planetas" key={ planet.name }>
+              <tr key={ planet.name }>
                 <td>{ planet.name }</td>
                 <td>{ planet.rotation_period }</td>
                 <td>{ planet.orbital_period }</td>

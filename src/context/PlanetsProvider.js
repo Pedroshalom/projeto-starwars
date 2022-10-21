@@ -1,11 +1,20 @@
-import React, { useState, useEffect, useMemo } from 'react';
+import React, { useState, useEffect, useMemo, useCallback } from 'react';
 import PropTypes from 'prop-types';
 import PlanetsContext from './PlanetsContext';
+
+const Listoption = [
+  'population',
+  'orbital_period',
+  'diameter',
+  'rotation_period',
+  'surface_water',
+];
 
 function PlanetsProvider({ children }) {
   const [planets, setPlanets] = useState([]);
   const [nameFilter, setFilterName] = useState('');
-  const [column, setColumn] = useState('population');
+  const [column, setColumn] = useState(Listoption[0]);
+  const [options, setOptions] = useState(Listoption);
   const [quantity, setQuantity] = useState(0);
   const [quantityForm, setQuantityForm] = useState('maior que');
 
@@ -25,22 +34,30 @@ function PlanetsProvider({ children }) {
     setQuantityForm(value);
   };
 
-  const filter = () => {
-    if (quantityForm === 'maior que') {
-      const selectFilter = planets.filter((planet) => +planet[column] > +quantity);
+  const filter = useCallback(() => {
+    switch (quantityForm) {
+    case 'maior que': {
+      const selectFilter = planets.filter((item) => +item[column] > +quantity);
       setPlanets(selectFilter);
     }
-
-    if (quantityForm === 'menor que') {
-      const selectFilter = planets.filter((planet) => +planet[column] < +quantity);
+      break;
+    case 'menor que': {
+      const selectFilter = planets.filter((item) => +item[column] < +quantity);
       setPlanets(selectFilter);
     }
-
-    if (quantityForm === 'igual a') {
-      const selectFilter = planets.filter((planet) => +planet[column] === +quantity);
+      break;
+    case 'igual a': {
+      const selectFilter = planets.filter((item) => +item[column] === +quantity);
       setPlanets(selectFilter);
     }
-  };
+      break;
+    default:
+      break;
+    }
+    const filterSlect = options.filter((item) => item !== column);
+    setOptions(filterSlect);
+    setColumn(filterSlect[0]);
+  }, [quantityForm, column, quantity, options, planets]);
 
   useEffect(() => {
     const URL = 'https://swapi.dev/api/planets';
@@ -66,11 +83,12 @@ function PlanetsProvider({ children }) {
     column,
     getColumn,
     quantity,
+    options,
     quantityForm,
     getQuantity,
     getQuantityFilter,
     filter,
-  }), [planets, nameFilter, column, quantity, quantityForm]);
+  }), [planets, nameFilter, column, quantity, options, quantityForm]);
 
   return (
     <PlanetsContext.Provider value={ context }>

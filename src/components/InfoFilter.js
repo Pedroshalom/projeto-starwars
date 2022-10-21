@@ -2,8 +2,10 @@ import React, { useContext } from 'react';
 import PlanetsContext from '../context/PlanetsContext';
 
 function InfoFilter() {
-  const { nameFilter, name, quantity, quantityFilter,
-    getQuantity, getQuantityFilter,
+  const { nameFilter, name,
+    quantity, quantityFilter,
+    getQuantity,
+    options, getQuantityFilter,
     column, getColumn, filter } = useContext(PlanetsContext);
   return (
     <section>
@@ -20,10 +22,7 @@ function InfoFilter() {
         onChange={ getColumn }
       >
         {
-          ['population', 'orbital_period', 'diameter', 'rotation_period', 'surface_water']
-            .map((planet) => (
-              <option key={ planet } value={ planet }>{ planet }</option>
-            ))
+          options.map((item) => (<option key={ item } value={ item }>{item}</option>))
         }
       </select>
 

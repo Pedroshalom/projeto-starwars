@@ -38,7 +38,7 @@ describe('implementando testes', () => {
 
     userEvent.click(buttonFilter);
 
-    const planetaTatooine = await screen.findByText(/tatooine/i, {}, {timeout: 15000});
-    expect(planetaTatooine).toBeInTheDocument();
+    const climate = await screen.findByText(/Climate/i, {}, {timeout: 15000});
+    expect(climate).toBeInTheDocument();
   });
 });
