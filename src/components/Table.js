@@ -4,7 +4,7 @@ import PlanetsContext from '../context/PlanetsContext';
 function Table() {
   const { planets, nameFilter } = useContext(PlanetsContext);
   return (
-    <table>
+    <table clasName="lista">
       <thead>
         <tr>
           <th>Name</th>

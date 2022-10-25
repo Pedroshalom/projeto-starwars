@@ -6,7 +6,8 @@ function InfoFilter() {
     quantity, quantityFilter,
     getQuantity,
     options, getQuantityFilter,
-    column, getColumn, filter } = useContext(PlanetsContext);
+    column, getColumn, filter,
+    removeFilter, arrayFilters, hendleRemove } = useContext(PlanetsContext);
   return (
     <section>
       <input
@@ -50,6 +51,32 @@ function InfoFilter() {
       >
         Filtrar
       </button>
+      <button
+        type="button"
+        data-testid="button-remove-filters"
+        onClick={ removeFilter }
+      >
+        Remover Filtros
+      </button>
+      {
+        arrayFilters.map((element) => (
+          <p
+            data-testid="filter"
+            key={ element.column }
+          >
+            {element.column}
+            <button
+              type="button"
+              onClick={ hendleRemove }
+              name={ element.column }
+
+            >
+              X
+
+            </button>
+          </p>
+        ))
+      }
     </section>
   );
 }
